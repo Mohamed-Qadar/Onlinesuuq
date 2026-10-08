@@ -1,7 +1,7 @@
 ; Inno Setup 6.3+ -- compile AFTER the x64 Flutter release and runtime copy.
 ; Keep AppId unchanged for future versions to upgrade the same installation.
 #ifndef MyAppVersion
-  #define MyAppVersion "1.0.0"
+  #define MyAppVersion "1.1.1"
 #endif
 #define MyAppName "Onlinesuuq"
 #define MyAppExeName "Onlinesuuq.exe"
@@ -17,6 +17,8 @@
 [Setup]
 AppId={{B3E95593-F277-4BCD-93F0-A31B18DCC913}
 AppName={#MyAppName}
+AppPublisher=Eng. Mohamed Ibrahim Abdi
+AppContact=mohamedqadar280@gmail.com
 AppVersion={#MyAppVersion}
 AppVerName={#MyAppName} {#MyAppVersion}
 AppSupportURL=https://github.com/Mohamed-Qadar/Onlinesuuq/issues

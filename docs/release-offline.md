@@ -1,4 +1,4 @@
-# Onlinesuuq 1.1.0 — Offline inventory for Windows
+# Onlinesuuq 1.1.1 — Offline inventory for Windows
 
 Download **Onlinesuuq-Setup.exe**, run it, then open Onlinesuuq from the Start menu. Windows 10/11 x64. No account, internet connection, Python or database installation required.
 
@@ -11,3 +11,5 @@ Download **Onlinesuuq-Setup.exe**, run it, then open Onlinesuuq from the Start m
 **Soomaali:** Soo dejiso Onlinesuuq-Setup.exe oo rakib. Ku dar alaabtaada, maamul kaydka, diiwaangeli iibka. Internet iyo akoon looma baahna. Xogtu waxay ku kaydsan tahay kombiyuutarkaaga. Samee nuqul joogto ah.
 
 Installer is currently unsigned; Windows may display an unknown-publisher warning. SHA256 checksum is attached. Existing inventory is stored outside the installation directory and retained on updates/uninstall. Export a backup before changing computers.
+
+Developed by **Eng. Mohamed Ibrahim Abdi** — Computer Engineer, specializing in Natural Language Processing and Computer Vision. Contact: mohamedqadar280@gmail.com. Version 1.1.1 adds permanent in-app developer attribution; existing inventory is retained.

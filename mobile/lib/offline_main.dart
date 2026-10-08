@@ -8,6 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'inventory.dart';
 import 'l10n.dart';
+import 'developer_credit.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -467,7 +468,7 @@ class _InventoryScreenState extends State<InventoryScreen> {
                   builder: (ctx) => AlertDialog(
                     title: Text(t('About this version', 'Ku saabsan noocan')),
                     content: SelectableText(
-                      '${t('Offline inventory • version 1.1.0\nNo account or internet required. Data stays on this Windows user profile. Back up regularly. Online shops and automatic cloud sync are not included in this version. Sales are local records; no payment is processed.', 'Kayd aan internet u baahnayn • nooca 1.1.0\nAkoon looma baahna. Xogtu waxay ku jirtaa kombiyuutarkan. Samee nuqul joogto ah. Noocan kuma jiraan dukaan internet ah ama isku xidhka xogta. Iibku waa diiwaan keliya; lacag lama wareejiyo.')}\n\n${db.directory.path}',
+                      '${t('Offline inventory • version 1.1.1\nNo account or internet required. Data stays on this Windows user profile. Back up regularly. Online shops and automatic cloud sync are not included in this version. Sales are local records; no payment is processed.', 'Kayd aan internet u baahnayn • nooca 1.1.1\nAkoon looma baahna. Xogtu waxay ku jirtaa kombiyuutarkan. Samee nuqul joogto ah. Noocan kuma jiraan dukaan internet ah ama isku xidhka xogta. Iibku waa diiwaan keliya; lacag lama wareejiyo.')}\n\n${db.directory.path}',
                     ),
                     actions: [
                       TextButton(
@@ -691,18 +692,27 @@ class _InventoryScreenState extends State<InventoryScreen> {
           ],
         ),
       ),
-      bottomNavigationBar: NavigationBar(
-        selectedIndex: tab,
-        onDestinationSelected: (v) => setState(() => tab = v),
-        destinations: [
-          NavigationDestination(
-            icon: const Icon(Icons.inventory_2_outlined),
-            label: t('Inventory', 'Kaydka'),
+      bottomNavigationBar: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          NavigationBar(
+            selectedIndex: tab,
+            onDestinationSelected: (v) => setState(() => tab = v),
+            destinations: [
+              NavigationDestination(
+                icon: const Icon(Icons.inventory_2_outlined),
+                label: t('Inventory', 'Kaydka'),
+              ),
+              NavigationDestination(
+                icon: const Icon(Icons.history),
+                label: t(
+                  'Stock & sales history',
+                  'Taariikhda kaydka iyo iibka',
+                ),
+              ),
+            ],
           ),
-          NavigationDestination(
-            icon: const Icon(Icons.history),
-            label: t('Stock & sales history', 'Taariikhda kaydka iyo iibka'),
-          ),
+          const DeveloperCredit(),
         ],
       ),
     );

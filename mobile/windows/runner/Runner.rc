@@ -89,6 +89,7 @@ BEGIN
     BEGIN
         BLOCK "040904e4"
         BEGIN
+            VALUE "Comments", "Developed by Eng. Mohamed Ibrahim Abdi | Computer Engineer | Natural Language Processing and Computer Vision | mohamedqadar280@gmail.com" "\0"
             VALUE "FileDescription", "Onlinesuuq" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
             VALUE "InternalName", "Onlinesuuq" "\0"

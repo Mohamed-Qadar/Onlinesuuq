@@ -8,6 +8,7 @@ import 'api.dart';
 import 'state.dart';
 import 'models.dart';
 import 'l10n.dart';
+import 'developer_credit.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -64,12 +65,12 @@ Future<void> openUrl(BuildContext context, String? url) async {
   final failed = tr(context, 'linkUnavailable');
   final uri = url == null ? null : Uri.tryParse(url);
   final ok =
-      uri != null &&
-      await launchUrl(uri, mode: LaunchMode.externalApplication);
+      uri != null && await launchUrl(uri, mode: LaunchMode.externalApplication);
   if (!ok) {
     messenger.showSnackBar(SnackBar(content: Text(failed)));
   }
 }
+
 Widget gap() => const SizedBox(height: 16);
 Widget note(BuildContext context, String key) => Padding(
   padding: const EdgeInsets.symmetric(vertical: 12),
@@ -228,6 +229,7 @@ class _HomeState extends ScreenState<HomeScreen> {
             style: Theme.of(context).textTheme.headlineMedium,
           ),
           note(context, 'intro'),
+          const DeveloperCredit(),
           TextField(
             controller: query,
             decoration: InputDecoration(
