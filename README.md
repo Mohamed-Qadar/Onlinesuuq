@@ -6,7 +6,7 @@
 
 Manage products, stock and sales on your own PC, without an account or backend. Somali and English are included.
 
-[Windows releases and installer](https://github.com/Mohamed-Qadar/Onlinesuuq/releases/latest)
+[Download Windows Setup.exe](https://github.com/Mohamed-Qadar/Onlinesuuq/releases/latest/download/Onlinesuuq-Setup.exe) · [Release notes](https://github.com/Mohamed-Qadar/Onlinesuuq/releases/latest)
 
 Run **Onlinesuuq-Setup.exe**, click Install, and open Onlinesuuq from the Start menu. Windows 10/11 x64. The installer includes the required runtime; users do not need Python, Flutter or a database server.
 
@@ -17,6 +17,10 @@ Run **Onlinesuuq-Setup.exe**, click Install, and open Onlinesuuq from the Start 
 - No online ordering, payments or automatic cloud synchronization in the offline release. Recorded sales are local bookkeeping entries, not payment confirmations.
 
 **Soomaali:** Soo dejiso faylka rakibidda, ku dar alaabtaada, maamul kaydka oo diiwaangeli iibka. Internet iyo akoon looma baahna. Samee nuqul joogto ah.
+
+[Step-by-step English / Somali guide](docs/OFFLINE_GUIDE.md)
+
+![Offline inventory example](docs/previews/offline-inventory-en.png)
 
 ## Build
 

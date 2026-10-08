@@ -1,3 +1,22 @@
+# Offline Windows release verification — 8 October 2026
+
+Version 1.1.0, application commit `403383227d912f44b42d1d9e300fa295921e4190`.
+
+[Successful Windows build](https://github.com/Mohamed-Qadar/Onlinesuuq/actions/runs/37757929316) · [Published release](https://github.com/Mohamed-Qadar/Onlinesuuq/releases/tag/v1.1.0)
+
+- Flutter analysis: no issues.
+- 18 Flutter tests passed, including inventory persistence, historical sale price, stock limits, backup validation/restore, archive history, incomplete writes and local product-entry/language switching.
+- Windows x64 release and Inno Setup installer compiled successfully.
+- Automated silent install, native process/window startup, local inventory initialization and uninstall passed on the GitHub Windows 2022 runner.
+- Desktop layout rendered and visually inspected at 1280x800 with fictional inventory.
+- Installer SHA256: `86ddb011cdb5aa541ccf9227aaff324e77f746e616eec436b125b8394caefb1d`.
+
+The hosted runner has development tools installed; this is not a claim of exhaustive testing on every clean consumer PC. The package bundles the Visual C++ runtime. Installer is unsigned. Offline mode does not include cloud sync, internet storefront, payment processing, or sale cancellation. Data is stored locally; users should export backups regularly.
+
+---
+
+## Earlier online / Android verification record
+
 # Gerçek doğrulama sonuçları
 
 Tarih: **8 Ekim 2026**, Africa/Nairobi. Son kaynak değişikliklerinden sonra çalıştırılan kontroller aşağıdadır. Çalıştırılmamış işlemler başarılı sayılmamıştır.
