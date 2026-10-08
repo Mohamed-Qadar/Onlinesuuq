@@ -1,0 +1,49 @@
+{% extends "shop/base_legal.html" %}
+{% block title %}{{ brand }} — Privacy Policy{% endblock %}
+{% block body %}
+<h1>{{ brand }} — Privacy Policy</h1>
+<p class="meta">This policy describes how the {{ brand }} mobile application handles your data. {{ brand }} is published by an individual developer, not a company. Set the effective date before publishing.</p>
+
+<h2>Who publishes this app</h2>
+<p>{{ brand }} is published by an individual developer:
+{% if publisher %}<strong>{{ publisher }}</strong>{% else %}<strong>[developer legal name — to be completed]</strong>{% endif %}.
+This is the publisher of the app. It is separate from the shops and sellers inside the app, who provide their own business and contact details.</p>
+
+<h2>What the app does</h2>
+<p>{{ brand }} lets independent sellers open a shop and lets buyers browse shops and place orders. Payments are arranged directly between buyer and seller using mobile-money services. The app does not process, hold or transfer any money.</p>
+
+<h2>Information collected</h2>
+<ul>
+  <li><strong>Seller account:</strong> your name, email address and a password (stored only as a salted hash, never in plain text).</li>
+  <li><strong>Shop profile:</strong> shop name, description, city, contact phone, optional WhatsApp number, delivery areas and the mobile-money account name and number you enter so buyers can pay you.</li>
+  <li><strong>Products:</strong> names, descriptions, prices, stock and the product photos you upload.</li>
+  <li><strong>Orders (buyers):</strong> the customer name, phone number, delivery area/address and any note entered when ordering, plus the items ordered.</li>
+  <li><strong>Technical:</strong> an anonymous guest session token and private order-tracking keys stored on your device, and your IP address, used only for rate-limiting and abuse prevention.</li>
+</ul>
+
+<h2>Device permissions</h2>
+<p>The app requests internet access only. Photos are chosen through your device's system photo picker. The app does not request access to SMS, location, contacts or broad file storage.</p>
+
+<h2>How information is used</h2>
+<p>To operate your account and shop, show products to buyers, pass order details to the relevant seller, let buyers track their orders, and keep the service secure. Your personal data is not sold and is not used for advertising.</p>
+
+<h2>Sharing</h2>
+<p>Shop contact and payment details that a seller enters are shown to buyers so they can contact and pay the seller. Order details are shown to the seller of that order. The app does not include third-party advertising or analytics SDKs. Data is stored on the developer's backend server and its hosting and email providers process it only to run the service.</p>
+
+<h2>Payments</h2>
+<p>Buyers pay sellers directly via mobile money (for example EVC Plus, eDahab, ZAAD or SAHAL). {{ brand }} never receives card numbers, banking credentials or funds.</p>
+
+<h2>Data retention and deletion</h2>
+<p>You can delete your account at any time from inside the app (<em>Manage my shop → Delete account</em>) or by emailing the developer. When an account is deleted, personal identifiers (name, email, shop contact phone/WhatsApp and mobile-money account details) are removed or anonymized, uploaded photos and the shop logo are deleted, the shop is unpublished and products are archived, and the account is deactivated so it can no longer sign in.</p>
+<p>Records of past orders and their activity history are kept with personal contact details removed, so sellers and buyers retain a record of completed transactions. <strong>[Retention period and the reason for it are to be completed by the developer — do not state a legal basis unless it genuinely applies.]</strong> See the <a href="/account-deletion/">Account &amp; data deletion</a> page.</p>
+
+<h2>Security</h2>
+<p>Traffic between the app and the server uses HTTPS (the release build refuses non-HTTPS endpoints). Authentication tokens are stored in the device's secure storage. Passwords are stored only as salted hashes.</p>
+
+<h2>Children</h2>
+<p>The app is intended for adults operating or buying from shops and is not directed at children.</p>
+
+<h2>Contact</h2>
+<p>Questions or deletion requests:
+{% if support_email %}<a href="mailto:{{ support_email }}">{{ support_email }}</a>{% else %}<strong>[support email — to be configured]</strong>{% endif %}.</p>
+{% endblock %}

@@ -1,0 +1,5 @@
+package so.dukaan.dukaan
+
+import io.flutter.embedding.android.FlutterActivity
+
+class MainActivity : FlutterActivity()

@@ -1,0 +1,1760 @@
+openapi: 3.0.3
+info:
+  title: Dukaan API
+  version: 1.0.0
+paths:
+  /api/v1/auth/login/:
+    post:
+      operationId: auth_login_create
+      description: |-
+        Takes a set of user credentials and returns an access and refresh JSON web
+        token pair to prove the authentication of those credentials.
+      tags:
+      - auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Login'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Login'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Login'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Login'
+          description: ''
+  /api/v1/auth/logout/:
+    post:
+      operationId: auth_logout_create
+      tags:
+      - auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Logout'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Logout'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Logout'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/v1/auth/password/:
+    post:
+      operationId: auth_password_create
+      tags:
+      - auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PasswordChange'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PasswordChange'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PasswordChange'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/v1/auth/refresh/:
+    post:
+      operationId: auth_refresh_create
+      description: |-
+        Takes a refresh type JSON web token and returns an access type JSON web
+        token if the refresh token is valid.
+      tags:
+      - auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Refresh'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Refresh'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Refresh'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Refresh'
+          description: ''
+  /api/v1/auth/register/:
+    post:
+      operationId: auth_register_create
+      tags:
+      - auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Register'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Register'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Register'
+        required: true
+      security:
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Register'
+          description: ''
+  /api/v1/auth/reset/:
+    post:
+      operationId: auth_reset_create
+      tags:
+      - auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ResetRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ResetRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ResetRequest'
+        required: true
+      security:
+      - {}
+      responses:
+        '204':
+          description: No response body
+  /api/v1/auth/reset/confirm/:
+    post:
+      operationId: auth_reset_confirm_create
+      tags:
+      - auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ResetConfirm'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ResetConfirm'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ResetConfirm'
+        required: true
+      security:
+      - {}
+      responses:
+        '204':
+          description: No response body
+  /api/v1/checkout/:
+    post:
+      operationId: checkout_create
+      parameters:
+      - in: header
+        name: X-Guest-Token
+        schema:
+          type: string
+        required: true
+      tags:
+      - checkout
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Submit'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Submit'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Submit'
+        required: true
+      security:
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CheckoutResult'
+          description: ''
+  /api/v1/checkout/{key}/:
+    get:
+      operationId: checkout_retrieve
+      parameters:
+      - in: header
+        name: X-Guest-Token
+        schema:
+          type: string
+        required: true
+      - in: path
+        name: key
+        schema:
+          type: string
+          format: uuid
+        required: true
+      tags:
+      - checkout
+      security:
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CheckoutResult'
+          description: ''
+  /api/v1/config/:
+    get:
+      operationId: config_retrieve
+      tags:
+      - config
+      security:
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConfigurationResult'
+          description: ''
+  /api/v1/guest/:
+    post:
+      operationId: guest_create
+      tags:
+      - guest
+      security:
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GuestSessionResult'
+          description: ''
+  /api/v1/products/{id}/:
+    get:
+      operationId: products_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - products
+      security:
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+          description: ''
+  /api/v1/quote/:
+    post:
+      operationId: quote_create
+      parameters:
+      - in: header
+        name: X-Guest-Token
+        schema:
+          type: string
+        required: true
+      tags:
+      - quote
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Checkout'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Checkout'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Checkout'
+        required: true
+      security:
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuoteResult'
+          description: ''
+  /api/v1/reports/:
+    post:
+      operationId: reports_create
+      tags:
+      - reports
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Report'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Report'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Report'
+        required: true
+      security:
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Report'
+          description: ''
+  /api/v1/seller/dashboard/:
+    get:
+      operationId: seller_dashboard_retrieve
+      tags:
+      - seller
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DashboardResult'
+          description: ''
+  /api/v1/seller/orders/:
+    get:
+      operationId: seller_orders_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      tags:
+      - seller
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedOrderList'
+          description: ''
+  /api/v1/seller/orders/{id}/:
+    get:
+      operationId: seller_orders_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this order.
+        required: true
+      tags:
+      - seller
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+          description: ''
+  /api/v1/seller/orders/{id}/act/:
+    post:
+      operationId: seller_orders_act_create
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this order.
+        required: true
+      tags:
+      - seller
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Action'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Action'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Action'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+          description: ''
+  /api/v1/seller/products/:
+    get:
+      operationId: seller_products_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      tags:
+      - seller
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedProductList'
+          description: ''
+    post:
+      operationId: seller_products_create
+      tags:
+      - seller
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Product'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Product'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Product'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+          description: ''
+  /api/v1/seller/products/{id}/:
+    get:
+      operationId: seller_products_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this product.
+        required: true
+      tags:
+      - seller
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+          description: ''
+    patch:
+      operationId: seller_products_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this product.
+        required: true
+      tags:
+      - seller
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedProduct'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedProduct'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedProduct'
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+          description: ''
+    delete:
+      operationId: seller_products_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this product.
+        required: true
+      tags:
+      - seller
+      security:
+      - jwtAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/v1/seller/products/{id}/photos/:
+    post:
+      operationId: seller_products_photos_create
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this product.
+        required: true
+      tags:
+      - seller
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PhotoUpload'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PhotoUpload'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PhotoUpload'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+          description: ''
+  /api/v1/seller/products/{id}/photos/{photo_id}/:
+    delete:
+      operationId: seller_products_photos_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this product.
+        required: true
+      - in: path
+        name: photo_id
+        schema:
+          type: string
+          pattern: ^\d+$
+        required: true
+      tags:
+      - seller
+      security:
+      - jwtAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/v1/seller/store/:
+    get:
+      operationId: seller_store_retrieve
+      tags:
+      - seller
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Store'
+          description: ''
+    post:
+      operationId: seller_store_create
+      tags:
+      - seller
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Store'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Store'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Store'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Store'
+          description: ''
+    patch:
+      operationId: seller_store_partial_update
+      tags:
+      - seller
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedStore'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedStore'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedStore'
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Store'
+          description: ''
+  /api/v1/seller/store/logo/:
+    post:
+      operationId: seller_store_logo_create
+      tags:
+      - seller
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LogoUpload'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/LogoUpload'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/LogoUpload'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Store'
+          description: ''
+  /api/v1/seller/store/publish/:
+    post:
+      operationId: seller_store_publish_create
+      tags:
+      - seller
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Publish'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Publish'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Publish'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Store'
+          description: ''
+  /api/v1/stores/:
+    get:
+      operationId: stores_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      tags:
+      - stores
+      security:
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedPublicStoreList'
+          description: ''
+  /api/v1/stores/{slug}/:
+    get:
+      operationId: stores_retrieve
+      parameters:
+      - in: path
+        name: slug
+        schema:
+          type: string
+        required: true
+      tags:
+      - stores
+      security:
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicStore'
+          description: ''
+  /api/v1/stores/{slug}/products/:
+    get:
+      operationId: stores_products_retrieve
+      parameters:
+      - in: path
+        name: slug
+        schema:
+          type: string
+        required: true
+      tags:
+      - stores
+      security:
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+          description: ''
+  /api/v1/tracking/:
+    get:
+      operationId: tracking_retrieve
+      parameters:
+      - in: header
+        name: X-Tracking-Token
+        schema:
+          type: string
+        required: true
+      tags:
+      - tracking
+      security:
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Tracking'
+          description: ''
+components:
+  schemas:
+    Action:
+      type: object
+      properties:
+        action:
+          $ref: '#/components/schemas/ActionEnum'
+        confirmed:
+          type: boolean
+          default: false
+        reference:
+          type: string
+          default: ''
+          maxLength: 120
+        reason:
+          type: string
+          default: ''
+          maxLength: 300
+      required:
+      - action
+    ActionEnum:
+      enum:
+      - ACCEPTED
+      - PREPARING
+      - DELIVERED
+      - CANCELLED
+      - PAID
+      - REFUNDED
+      - CORRECT_PAYMENT
+      type: string
+      description: |-
+        * `ACCEPTED` - ACCEPTED
+        * `PREPARING` - PREPARING
+        * `DELIVERED` - DELIVERED
+        * `CANCELLED` - CANCELLED
+        * `PAID` - PAID
+        * `REFUNDED` - REFUNDED
+        * `CORRECT_PAYMENT` - CORRECT_PAYMENT
+    Checkout:
+      type: object
+      properties:
+        store:
+          type: integer
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/CheckoutLine'
+        customer_name:
+          type: string
+          maxLength: 120
+        phone:
+          type: string
+          pattern: ^\+[1-9]\d{6,14}$
+          maxLength: 16
+        fulfillment:
+          $ref: '#/components/schemas/FulfillmentEnum'
+        region:
+          type: string
+          default: ''
+          maxLength: 100
+        address:
+          type: string
+          default: ''
+          maxLength: 500
+        note:
+          type: string
+          default: ''
+          maxLength: 500
+      required:
+      - customer_name
+      - fulfillment
+      - items
+      - phone
+      - store
+    CheckoutLine:
+      type: object
+      properties:
+        product:
+          type: integer
+          minimum: 1
+        quantity:
+          type: integer
+          maximum: 999
+          minimum: 1
+      required:
+      - product
+      - quantity
+    CheckoutResult:
+      type: object
+      properties:
+        tracking_token:
+          type: string
+        order:
+          $ref: '#/components/schemas/Tracking'
+      required:
+      - order
+      - tracking_token
+    ConfigurationResult:
+      type: object
+      properties:
+        brand_name:
+          type: string
+      required:
+      - brand_name
+    DashboardResult:
+      type: object
+      properties:
+        active_products:
+          type: integer
+        new_orders:
+          type: integer
+        preparing_orders:
+          type: integer
+        seller_confirmed_total:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,12}(?:\.\d{0,2})?$
+        low_stock:
+          type: array
+          items:
+            $ref: '#/components/schemas/Product'
+      required:
+      - active_products
+      - low_stock
+      - new_orders
+      - preparing_orders
+      - seller_confirmed_total
+    Event:
+      type: object
+      properties:
+        action:
+          type: string
+          maxLength: 40
+        reason:
+          type: string
+          maxLength: 500
+        reference:
+          type: string
+          maxLength: 120
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        actor:
+          type: integer
+          nullable: true
+      required:
+      - action
+      - created_at
+    FulfillmentEnum:
+      enum:
+      - pickup
+      - delivery
+      type: string
+      description: |-
+        * `pickup` - Pickup
+        * `delivery` - Delivery
+    GuestSessionResult:
+      type: object
+      properties:
+        token:
+          type: string
+        expires_at:
+          type: string
+          format: date-time
+      required:
+      - expires_at
+      - token
+    Line:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 160
+        unit_price:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
+        quantity:
+          type: integer
+          maximum: 2147483647
+          minimum: 0
+        line_total:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,10}(?:\.\d{0,2})?$
+      required:
+      - line_total
+      - name
+      - quantity
+      - unit_price
+    Login:
+      type: object
+      properties:
+        email:
+          type: string
+          writeOnly: true
+        password:
+          type: string
+          writeOnly: true
+      required:
+      - email
+      - password
+    LogoUpload:
+      type: object
+      properties:
+        image:
+          type: string
+          format: uri
+      required:
+      - image
+    Logout:
+      type: object
+      properties:
+        refresh:
+          type: string
+      required:
+      - refresh
+    Order:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        reference:
+          type: string
+          readOnly: true
+        customer_name:
+          type: string
+          readOnly: true
+        phone:
+          type: string
+          readOnly: true
+        fulfillment:
+          allOf:
+          - $ref: '#/components/schemas/FulfillmentEnum'
+          readOnly: true
+        region:
+          type: string
+          readOnly: true
+        address:
+          type: string
+          readOnly: true
+        note:
+          type: string
+          readOnly: true
+        delivery_fee:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
+          readOnly: true
+        total:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,10}(?:\.\d{0,2})?$
+          readOnly: true
+        status:
+          allOf:
+          - $ref: '#/components/schemas/StatusEnum'
+          readOnly: true
+        payment:
+          allOf:
+          - $ref: '#/components/schemas/PaymentEnum'
+          readOnly: true
+        payment_instructions:
+          readOnly: true
+        payment_confirmed_at:
+          type: string
+          format: date-time
+          readOnly: true
+          nullable: true
+        payment_confirmed_by:
+          type: integer
+          readOnly: true
+          nullable: true
+        payment_reference:
+          type: string
+          readOnly: true
+        lines:
+          type: array
+          items:
+            $ref: '#/components/schemas/Line'
+          readOnly: true
+        events:
+          type: array
+          items:
+            $ref: '#/components/schemas/Event'
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - address
+      - created_at
+      - customer_name
+      - delivery_fee
+      - events
+      - fulfillment
+      - id
+      - lines
+      - note
+      - payment
+      - payment_confirmed_at
+      - payment_confirmed_by
+      - payment_instructions
+      - payment_reference
+      - phone
+      - reference
+      - region
+      - status
+      - total
+    PaginatedOrderList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Order'
+    PaginatedProductList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Product'
+    PaginatedPublicStoreList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/PublicStore'
+    PasswordChange:
+      type: object
+      properties:
+        old_password:
+          type: string
+        password:
+          type: string
+      required:
+      - old_password
+      - password
+    PatchedProduct:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        store:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 160
+        slug:
+          type: string
+          maxLength: 50
+          pattern: ^[-a-zA-Z0-9_]+$
+        description:
+          type: string
+          maxLength: 4000
+        category:
+          type: string
+          maxLength: 80
+        price:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
+        stock:
+          type: integer
+          maximum: 2147483647
+          minimum: 0
+        published:
+          type: boolean
+        archived:
+          type: boolean
+        moderated:
+          type: boolean
+          readOnly: true
+        photos:
+          type: array
+          items:
+            $ref: '#/components/schemas/Photo'
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        expected_updated_at:
+          type: string
+          format: date-time
+          writeOnly: true
+    PatchedStore:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 120
+        slug:
+          type: string
+          maxLength: 50
+          pattern: ^[-a-zA-Z0-9_]+$
+        description:
+          type: string
+          maxLength: 500
+        logo:
+          type: string
+          format: uri
+          nullable: true
+          readOnly: true
+        phone:
+          type: string
+          pattern: ^\+[1-9]\d{6,14}$
+          maxLength: 16
+        whatsapp:
+          oneOf:
+          - type: string
+            pattern: ^\+[1-9]\d{6,14}$
+            maxLength: 16
+          - type: string
+            maxLength: 0
+        city:
+          type: string
+          maxLength: 100
+        delivery_regions: {}
+        pickup_instructions:
+          type: string
+          maxLength: 300
+        delivery_fee:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
+        payment_provider:
+          $ref: '#/components/schemas/PaymentProviderEnum'
+        payment_account:
+          type: string
+          maxLength: 100
+        payment_name:
+          type: string
+          maxLength: 120
+        published:
+          type: boolean
+          readOnly: true
+        suspended:
+          type: boolean
+          readOnly: true
+    PaymentEnum:
+      enum:
+      - UNPAID
+      - PAID
+      - REFUND_REQUIRED
+      - REFUNDED
+      type: string
+      description: |-
+        * `UNPAID` - Unpaid
+        * `PAID` - Paid — seller confirmed
+        * `REFUND_REQUIRED` - Refund required
+        * `REFUNDED` - Refunded — seller confirmed
+    PaymentProviderEnum:
+      enum:
+      - EVC Plus
+      - eDahab
+      - ZAAD
+      - SAHAL
+      - Other
+      type: string
+      description: |-
+        * `EVC Plus` - EVC Plus
+        * `eDahab` - eDahab
+        * `ZAAD` - ZAAD
+        * `SAHAL` - SAHAL
+        * `Other` - Other
+    Photo:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        image:
+          type: string
+          format: uri
+      required:
+      - id
+      - image
+    PhotoUpload:
+      type: object
+      properties:
+        image:
+          type: string
+          format: uri
+      required:
+      - image
+    Product:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        store:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 160
+        slug:
+          type: string
+          maxLength: 50
+          pattern: ^[-a-zA-Z0-9_]+$
+        description:
+          type: string
+          maxLength: 4000
+        category:
+          type: string
+          maxLength: 80
+        price:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
+        stock:
+          type: integer
+          maximum: 2147483647
+          minimum: 0
+        published:
+          type: boolean
+        archived:
+          type: boolean
+        moderated:
+          type: boolean
+          readOnly: true
+        photos:
+          type: array
+          items:
+            $ref: '#/components/schemas/Photo'
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        expected_updated_at:
+          type: string
+          format: date-time
+          writeOnly: true
+      required:
+      - created_at
+      - id
+      - moderated
+      - name
+      - photos
+      - price
+      - slug
+      - store
+      - updated_at
+    PublicStore:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 120
+        slug:
+          type: string
+          maxLength: 50
+          pattern: ^[-a-zA-Z0-9_]+$
+        description:
+          type: string
+          maxLength: 500
+        logo:
+          type: string
+          format: uri
+          nullable: true
+          readOnly: true
+        phone:
+          type: string
+          pattern: ^\+[1-9]\d{6,14}$
+          maxLength: 16
+        whatsapp:
+          oneOf:
+          - type: string
+            pattern: ^\+[1-9]\d{6,14}$
+            maxLength: 16
+          - type: string
+            maxLength: 0
+        city:
+          type: string
+          maxLength: 100
+        delivery_regions: {}
+        pickup_instructions:
+          type: string
+          maxLength: 300
+        delivery_fee:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
+        published:
+          type: boolean
+          readOnly: true
+      required:
+      - city
+      - id
+      - logo
+      - name
+      - phone
+      - pickup_instructions
+      - published
+      - slug
+    Publish:
+      type: object
+      properties:
+        published:
+          type: boolean
+      required:
+      - published
+    QuoteLine:
+      type: object
+      properties:
+        product:
+          type: integer
+        name:
+          type: string
+        unit_price:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
+        quantity:
+          type: integer
+        line_total:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,10}(?:\.\d{0,2})?$
+      required:
+      - line_total
+      - name
+      - product
+      - quantity
+      - unit_price
+    QuoteResult:
+      type: object
+      properties:
+        store:
+          type: integer
+        lines:
+          type: array
+          items:
+            $ref: '#/components/schemas/QuoteLine'
+        delivery_fee:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
+        total:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,10}(?:\.\d{0,2})?$
+        quote:
+          type: string
+      required:
+      - delivery_fee
+      - lines
+      - quote
+      - store
+      - total
+    Refresh:
+      type: object
+      properties:
+        refresh:
+          type: string
+        access:
+          type: string
+          readOnly: true
+      required:
+      - access
+      - refresh
+    Register:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 120
+        email:
+          type: string
+          format: email
+          maxLength: 254
+        password:
+          type: string
+          writeOnly: true
+        password_repeat:
+          type: string
+          writeOnly: true
+      required:
+      - email
+      - id
+      - name
+      - password
+      - password_repeat
+    Report:
+      type: object
+      properties:
+        store:
+          type: integer
+        product:
+          type: integer
+          nullable: true
+        reason:
+          type: string
+          maxLength: 1000
+      required:
+      - reason
+      - store
+    ResetConfirm:
+      type: object
+      properties:
+        uid:
+          type: string
+        token:
+          type: string
+        password:
+          type: string
+      required:
+      - password
+      - token
+      - uid
+    ResetRequest:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+      required:
+      - email
+    StatusEnum:
+      enum:
+      - NEW
+      - ACCEPTED
+      - PREPARING
+      - DELIVERED
+      - CANCELLED
+      type: string
+      description: |-
+        * `NEW` - New
+        * `ACCEPTED` - Accepted
+        * `PREPARING` - Preparing
+        * `DELIVERED` - Delivered
+        * `CANCELLED` - Cancelled
+    Store:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 120
+        slug:
+          type: string
+          maxLength: 50
+          pattern: ^[-a-zA-Z0-9_]+$
+        description:
+          type: string
+          maxLength: 500
+        logo:
+          type: string
+          format: uri
+          nullable: true
+          readOnly: true
+        phone:
+          type: string
+          pattern: ^\+[1-9]\d{6,14}$
+          maxLength: 16
+        whatsapp:
+          oneOf:
+          - type: string
+            pattern: ^\+[1-9]\d{6,14}$
+            maxLength: 16
+          - type: string
+            maxLength: 0
+        city:
+          type: string
+          maxLength: 100
+        delivery_regions: {}
+        pickup_instructions:
+          type: string
+          maxLength: 300
+        delivery_fee:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
+        payment_provider:
+          $ref: '#/components/schemas/PaymentProviderEnum'
+        payment_account:
+          type: string
+          maxLength: 100
+        payment_name:
+          type: string
+          maxLength: 120
+        published:
+          type: boolean
+          readOnly: true
+        suspended:
+          type: boolean
+          readOnly: true
+      required:
+      - city
+      - id
+      - logo
+      - name
+      - payment_account
+      - payment_name
+      - payment_provider
+      - phone
+      - pickup_instructions
+      - published
+      - slug
+      - suspended
+    Submit:
+      type: object
+      properties:
+        store:
+          type: integer
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/CheckoutLine'
+        customer_name:
+          type: string
+          maxLength: 120
+        phone:
+          type: string
+          pattern: ^\+[1-9]\d{6,14}$
+          maxLength: 16
+        fulfillment:
+          $ref: '#/components/schemas/FulfillmentEnum'
+        region:
+          type: string
+          default: ''
+          maxLength: 100
+        address:
+          type: string
+          default: ''
+          maxLength: 500
+        note:
+          type: string
+          default: ''
+          maxLength: 500
+        idempotency_key:
+          type: string
+          format: uuid
+        quote:
+          type: string
+      required:
+      - customer_name
+      - fulfillment
+      - idempotency_key
+      - items
+      - phone
+      - quote
+      - store
+    Tracking:
+      type: object
+      properties:
+        reference:
+          type: string
+          readOnly: true
+        status:
+          $ref: '#/components/schemas/StatusEnum'
+        payment:
+          $ref: '#/components/schemas/PaymentEnum'
+        fulfillment:
+          $ref: '#/components/schemas/FulfillmentEnum'
+        delivery_fee:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
+        total:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,10}(?:\.\d{0,2})?$
+        lines:
+          type: array
+          items:
+            $ref: '#/components/schemas/Line'
+          readOnly: true
+        payment_instructions:
+          type: object
+          additionalProperties:
+            type: string
+          nullable: true
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - created_at
+      - delivery_fee
+      - fulfillment
+      - lines
+      - payment_instructions
+      - reference
+      - total
+  securitySchemes:
+    jwtAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

@@ -1,0 +1,204 @@
+#
+msgid ""
+msgstr ""
+"Language: en\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "A product can have at most three photos."
+msgstr "A product can have at most three photos."
+
+msgid "A product is unavailable."
+msgstr "A product is unavailable."
+
+msgid "A valid integer is required."
+msgstr "A valid integer is required."
+
+msgid "A valid number is required."
+msgstr "A valid number is required."
+
+msgid "Accepted"
+msgstr "Accepted"
+
+msgid "Add an available published product first."
+msgstr "Add an available published product first."
+
+msgid "Authentication credentials were not provided."
+msgstr "Authentication credentials were not provided."
+
+msgid "Cancelled"
+msgstr "Cancelled"
+
+msgid "Choose a delivery region and enter an address."
+msgstr "Choose a delivery region and enter an address."
+
+msgid "Choose an image."
+msgstr "Choose an image."
+
+msgid "Complete your store profile before publishing."
+msgstr "Complete your store profile before publishing."
+
+msgid "Current password is incorrect."
+msgstr "Current password is incorrect."
+
+msgid "Delivered"
+msgstr "Delivered"
+
+msgid "Delivery"
+msgstr "Delivery"
+
+msgid "Duplicate products are not allowed."
+msgstr "Duplicate products are not allowed."
+
+msgid "Ensure this field has at least {min_length} characters."
+msgstr "Ensure this field has at least {min_length} characters."
+
+msgid "Ensure this field has no more than {max_length} characters."
+msgstr "Ensure this field has no more than {max_length} characters."
+
+msgid "Ensure this value is greater than or equal to {min_value}."
+msgstr "Ensure this value is greater than or equal to {min_value}."
+
+msgid "Ensure this value is less than or equal to {max_value}."
+msgstr "Ensure this value is less than or equal to {max_value}."
+
+msgid "Enter a list of delivery regions."
+msgstr "Enter a list of delivery regions."
+
+msgid "Enter a valid email address."
+msgstr "Enter a valid email address."
+
+msgid "Explicit confirmation is required."
+msgstr "Explicit confirmation is required."
+
+msgid "Guest session expired."
+msgstr "Guest session expired."
+
+msgid "Images must be at most 5 MB."
+msgstr "Images must be at most 5 MB."
+
+msgid "Insufficient stock or unavailable product."
+msgstr "Insufficient stock or unavailable product."
+
+msgid "Insufficient stock."
+msgstr "Insufficient stock."
+
+msgid "Invalid order transition."
+msgstr "Invalid order transition."
+
+msgid "Invalid reset code or password."
+msgstr "Invalid reset code or password."
+
+msgid "Must be a valid boolean."
+msgstr "Must be a valid boolean."
+
+msgid "New"
+msgstr "New"
+
+msgid "No active account found with the given credentials"
+msgstr "No active account found with the given credentials"
+
+msgid "No file was submitted."
+msgstr "No file was submitted."
+
+msgid "No refund is awaiting confirmation."
+msgstr "No refund is awaiting confirmation."
+
+msgid "Not found."
+msgstr "Not found."
+
+msgid "Only an administrator may correct a payment, with a reason."
+msgstr "Only an administrator may correct a payment, with a reason."
+
+msgid "Order total exceeds the supported limit."
+msgstr "Order total exceeds the supported limit."
+
+msgid "Paid — seller confirmed"
+msgstr "Paid — seller confirmed"
+
+msgid "Passwords do not match."
+msgstr "Passwords do not match."
+
+msgid "Payment cannot be confirmed for this order."
+msgstr "Payment cannot be confirmed for this order."
+
+msgid "Pickup"
+msgstr "Pickup"
+
+msgid "Preparing"
+msgstr "Preparing"
+
+msgid ""
+"Prices or order details changed. Review the latest total and confirm again."
+msgstr ""
+"Prices or order details changed. Review the latest total and confirm again."
+
+msgid "Refund required"
+msgstr "Refund required"
+
+msgid "Refunded — seller confirmed"
+msgstr "Refunded — seller confirmed"
+
+msgid "Review the latest total and confirm again."
+msgstr "Review the latest total and confirm again."
+
+msgid "Session expired."
+msgstr "Session expired."
+
+msgid ""
+"Stock changed or needs a fresh version. Reload the product before editing."
+msgstr ""
+"Stock changed or needs a fresh version. Reload the product before editing."
+
+msgid "The product must belong to this store."
+msgstr "The product must belong to this store."
+
+msgid ""
+"The submitted data was not a file. Check the encoding type on the form."
+msgstr ""
+"The submitted data was not a file. Check the encoding type on the form."
+
+msgid "This checkout key was already used for different details."
+msgstr "This checkout key was already used for different details."
+
+msgid "This email is already registered."
+msgstr "This email is already registered."
+
+msgid "This field is required."
+msgstr "This field is required."
+
+msgid "This field may not be blank."
+msgstr "This field may not be blank."
+
+msgid "This field may not be null."
+msgstr "This field may not be null."
+
+msgid "This password is entirely numeric."
+msgstr "This password is entirely numeric."
+
+msgid "This password is too common."
+msgstr "This password is too common."
+
+msgid "This product code is already used."
+msgstr "This product code is already used."
+
+msgid "This store code is already used."
+msgstr "This store code is already used."
+
+msgid "This store is unavailable."
+msgstr "This store is unavailable."
+
+msgid "Unpaid"
+msgstr "Unpaid"
+
+msgid "Upload a valid JPEG, PNG or WebP image."
+msgstr "Upload a valid JPEG, PNG or WebP image."
+
+msgid "Use an international phone number, for example +252612345678."
+msgstr "Use an international phone number, for example +252612345678."
+
+msgid "You already have a store."
+msgstr "You already have a store."
+
+msgid "You do not have permission to perform this action."
+msgstr "You do not have permission to perform this action."

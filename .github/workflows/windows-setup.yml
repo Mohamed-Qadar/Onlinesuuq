@@ -1,0 +1,79 @@
+name: Build Windows Setup
+
+on:
+  workflow_dispatch:
+    inputs:
+      api_url:
+        description: 'Live HTTPS Django URL ending in /api/v1/ (required)'
+        required: true
+        type: string
+      create_draft_release:
+        description: 'Attach Setup to a draft release after a successful build'
+        required: true
+        default: true
+        type: boolean
+
+permissions:
+  contents: write
+
+concurrency:
+  group: windows-setup
+  cancel-in-progress: false
+
+jobs:
+  setup:
+    runs-on: windows-2022
+    timeout-minutes: 45
+    defaults:
+      run:
+        shell: pwsh
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - name: Check live backend
+        env:
+          API_URL: ${{ inputs.api_url }}
+        run: |
+          $uri = $null
+          if (-not [Uri]::TryCreate($env:API_URL, [UriKind]::Absolute, [ref]$uri) -or
+              $uri.Scheme -ne 'https' -or -not $uri.AbsolutePath.EndsWith('/api/v1/') -or
+              $uri.UserInfo -or $uri.Query -or $uri.Fragment -or $uri.IsLoopback) {
+            throw 'Supply a live HTTPS API URL ending in /api/v1/.'
+          }
+          $config = Invoke-RestMethod -Uri ($env:API_URL + 'config/') -TimeoutSec 30
+          if (-not $config.brand_name) { throw 'Backend configuration endpoint was not valid.' }
+      - name: Install pinned Flutter SDK
+        run: |
+          $sdk = Join-Path $env:RUNNER_TEMP 'flutter'
+          git clone --depth 1 --branch 3.47.6 https://github.com/flutter/flutter.git $sdk
+          if ($LASTEXITCODE -ne 0) { throw 'Flutter download failed.' }
+          $revision = git -C $sdk rev-parse HEAD
+          if ($revision -ne '5fc346839b5d0eef006ed8404392afb4dfae428d') { throw 'Unexpected Flutter revision.' }
+          (Join-Path $sdk 'bin') | Out-File -FilePath $env:GITHUB_PATH -Append -Encoding utf8
+      - name: Build and package
+        env:
+          API_URL: ${{ inputs.api_url }}
+        run: |
+          flutter config --enable-windows-desktop --no-analytics
+          .\packaging\windows\Build-Setup.ps1 -ApiUrl $env:API_URL
+      - name: Save installer artifact
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: Onlinesuuq-Windows-Setup
+          path: dist/Onlinesuuq-Setup.exe*
+          if-no-files-found: error
+          retention-days: 14
+      - name: Create draft release
+        if: ${{ inputs.create_draft_release }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          $spec = Get-Content mobile/pubspec.yaml -Raw
+          $version = [regex]::Match($spec, '(?m)^version:\s*(\d+\.\d+\.\d+)').Groups[1].Value
+          if (-not $version) { throw 'Missing release version.' }
+          gh release create "v$version" --draft --target $env:GITHUB_SHA `
+            --title "Onlinesuuq $version - Windows" `
+            --notes 'Windows x64 installer. Somali and English. Internet connection required. Test installation, sign-in, photo uploads and checkout on a clean PC before publishing this draft.' `
+            dist/Onlinesuuq-Setup.exe dist/Onlinesuuq-Setup.exe.sha256
+          if ($LASTEXITCODE -ne 0) { throw 'Draft release creation failed. The workflow artifact is still available.' }

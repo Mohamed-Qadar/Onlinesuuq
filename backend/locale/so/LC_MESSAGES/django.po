@@ -1,0 +1,203 @@
+#
+msgid ""
+msgstr ""
+"Language: so\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "A product can have at most three photos."
+msgstr "Alaabtu waxay yeelan kartaa ugu badnaan saddex sawir."
+
+msgid "A product is unavailable."
+msgstr "Alaab ayaa hadda aan la heli karin."
+
+msgid "A valid integer is required."
+msgstr "Geli tiro dhan oo sax ah."
+
+msgid "A valid number is required."
+msgstr "Geli tiro sax ah."
+
+msgid "Accepted"
+msgstr "La aqbalay"
+
+msgid "Add an available published product first."
+msgstr "Marka hore ku dar alaab kayd leh oo la daabacay."
+
+msgid "Authentication credentials were not provided."
+msgstr "Xogta gelitaanka lama bixin."
+
+msgid "Cancelled"
+msgstr "La joojiyey"
+
+msgid "Choose a delivery region and enter an address."
+msgstr "Dooro aagga gaarsiinta oo geli cinwaanka."
+
+msgid "Choose an image."
+msgstr "Dooro sawir."
+
+msgid "Complete your store profile before publishing."
+msgstr "Dhammaystir xogta dukaanka ka hor daabicidda."
+
+msgid "Current password is incorrect."
+msgstr "Furaha sirta ah ee hadda waa khalad."
+
+msgid "Delivered"
+msgstr "La gaarsiiyey"
+
+msgid "Delivery"
+msgstr "Gaarsiin"
+
+msgid "Duplicate products are not allowed."
+msgstr "Alaab isku mid ah laba jeer lama gelin karo."
+
+msgid "Ensure this field has at least {min_length} characters."
+msgstr "Goobtan ha lahaato ugu yaraan {min_length} xaraf."
+
+msgid "Ensure this field has no more than {max_length} characters."
+msgstr "Goobtan ha ka badnaan {max_length} xaraf."
+
+msgid "Ensure this value is greater than or equal to {min_value}."
+msgstr "Qiimuhu waa inuu ahaadaa {min_value} ama ka badan."
+
+msgid "Ensure this value is less than or equal to {max_value}."
+msgstr "Qiimuhu waa inuu ahaadaa {max_value} ama ka yar."
+
+msgid "Enter a list of delivery regions."
+msgstr "Geli liiska aagagga gaarsiinta."
+
+msgid "Enter a valid email address."
+msgstr "Geli cinwaan iimayl sax ah."
+
+msgid "Explicit confirmation is required."
+msgstr "Xaqiijin cad ayaa loo baahan yahay."
+
+msgid "Guest session expired."
+msgstr "Fadhiga martida wuu dhacay."
+
+msgid "Images must be at most 5 MB."
+msgstr "Sawirku kama weynaan karo 5 MB."
+
+msgid "Insufficient stock or unavailable product."
+msgstr "Kaydku kuma filna ama alaabta lama heli karo."
+
+msgid "Insufficient stock."
+msgstr "Kaydku kuma filna."
+
+msgid "Invalid order transition."
+msgstr "Isbeddelkan dalabka lama oggola."
+
+msgid "Invalid reset code or password."
+msgstr "Koodhka ama furaha sirta ah waa khalad."
+
+msgid "Must be a valid boolean."
+msgstr "Dooro haa ama maya."
+
+msgid "New"
+msgstr "Cusub"
+
+msgid "No active account found with the given credentials"
+msgstr "Akoon firfircoon laguma helin xogtan gelitaanka."
+
+msgid "No file was submitted."
+msgstr "Fayl lama soo dirin."
+
+msgid "No refund is awaiting confirmation."
+msgstr "Ma jiro lacag celin sugaysa xaqiijin."
+
+msgid "Not found."
+msgstr "Lama helin."
+
+msgid "Only an administrator may correct a payment, with a reason."
+msgstr ""
+"Maamulaha oo keliya ayaa sixi kara lacag bixinta isagoo sabab sheegaya."
+
+msgid "Order total exceeds the supported limit."
+msgstr "Wadarta dalabku waxay dhaaftay xadka la oggol yahay."
+
+msgid "Paid — seller confirmed"
+msgstr "Waa la bixiyey — iibiyaha ayaa xaqiijiyey"
+
+msgid "Passwords do not match."
+msgstr "Furayaasha sirta ah isma waafaqaan."
+
+msgid "Payment cannot be confirmed for this order."
+msgstr "Lacag bixinta dalabkan lama xaqiijin karo."
+
+msgid "Pickup"
+msgstr "Soo qaado"
+
+msgid "Preparing"
+msgstr "La diyaarinayo"
+
+msgid ""
+"Prices or order details changed. Review the latest total and confirm again."
+msgstr ""
+"Qiimaha ama xogta dalabka ayaa is beddelay. Hubi wadarta cusub oo xaqiiji."
+
+msgid "Refund required"
+msgstr "Lacag celin ayaa loo baahan yahay"
+
+msgid "Refunded — seller confirmed"
+msgstr "Lacagta waa la celiyey"
+
+msgid "Review the latest total and confirm again."
+msgstr "Hubi wadarta cusub oo mar kale xaqiiji."
+
+msgid "Session expired."
+msgstr "Fadhigu wuu dhacay."
+
+msgid ""
+"Stock changed or needs a fresh version. Reload the product before editing."
+msgstr "Kaydku wuu is beddelay. Dib u soo geli alaabta ka hor tafatirka."
+
+msgid "The product must belong to this store."
+msgstr "Alaabtu waa inay ka tirsan tahay dukaankan."
+
+msgid ""
+"The submitted data was not a file. Check the encoding type on the form."
+msgstr "Xogta la soo diray ma aha fayl sax ah."
+
+msgid "This checkout key was already used for different details."
+msgstr "Furahan dalabka hore ayaa loogu isticmaalay xog kale."
+
+msgid "This email is already registered."
+msgstr "Iimaylkan horay ayaa loo diiwaangeliyey."
+
+msgid "This field is required."
+msgstr "Goobtan waa khasab."
+
+msgid "This field may not be blank."
+msgstr "Goobtan madhan lagama tagi karo."
+
+msgid "This field may not be null."
+msgstr "Goobtan waa inay leedahay qiime."
+
+msgid "This password is entirely numeric."
+msgstr "Furahan sirta ah wuxuu ka kooban yahay tirooyin keliya."
+
+msgid "This password is too common."
+msgstr "Furahan sirta ah aad ayaa loo isticmaalaa."
+
+msgid "This product code is already used."
+msgstr "Koodhkan alaabta hore ayaa loo isticmaalay."
+
+msgid "This store code is already used."
+msgstr "Koodhkan dukaanka hore ayaa loo isticmaalay."
+
+msgid "This store is unavailable."
+msgstr "Dukaankan hadda lama heli karo."
+
+msgid "Unpaid"
+msgstr "Lama bixin"
+
+msgid "Upload a valid JPEG, PNG or WebP image."
+msgstr "Soo geli sawir sax ah oo JPEG, PNG ama WebP ah."
+
+msgid "Use an international phone number, for example +252612345678."
+msgstr "Isticmaal lambar caalami ah, tusaale +252612345678."
+
+msgid "You already have a store."
+msgstr "Waxaad horay u leedahay dukaan."
+
+msgid "You do not have permission to perform this action."
+msgstr "Uma lihid oggolaansho ficilkan."

@@ -1,0 +1,35 @@
+{% extends "shop/base_legal.html" %}
+{% block title %}{{ brand }} — Account &amp; Data Deletion{% endblock %}
+{% block body %}
+<h1>{{ brand }} — Account &amp; Data Deletion</h1>
+<p class="meta">How to request deletion of your {{ brand }} account and associated data. {{ brand }} is published by an individual developer{% if publisher %}, {{ publisher }}{% endif %}.</p>
+
+<h2>Delete from inside the app</h2>
+<ol>
+  <li>Open {{ brand }} and sign in.</li>
+  <li>Go to <strong>Manage my shop</strong>.</li>
+  <li>Tap <strong>Delete account</strong>.</li>
+  <li>Enter your password and confirm. Your account is deleted immediately. Your password is required so that no one else can delete your account.</li>
+</ol>
+
+<h2>Request deletion without the app</h2>
+<p>If you cannot access the app, email
+{% if support_email %}<a href="mailto:{{ support_email }}">{{ support_email }}</a>{% else %}<strong>[support email — to be configured]</strong>{% endif %}
+from the email address on your account and ask for deletion. The request is acted on only after account ownership is verified (for example by confirming control of the account email), so that no one can have another person's account deleted.</p>
+
+<h2>What is deleted</h2>
+<ul>
+  <li>Your name and email address (replaced with an anonymized value).</li>
+  <li>Your password (the account can no longer sign in).</li>
+  <li>Your shop's contact phone, WhatsApp number, description and mobile-money account details.</li>
+  <li>All product photos you uploaded and your shop logo.</li>
+  <li>The shop is unpublished and your products are archived.</li>
+</ul>
+
+<h2>What is retained, and why</h2>
+<p>Records of past orders and their activity history are retained, with personal contact details removed, so both sides keep a record of completed transactions. Nothing that would let the account sign in again is kept.</p>
+<p><strong>[To be completed by the developer: the retention period for these records and the reason for keeping them. State an actual reason that applies to you; do not claim a legal requirement that does not.]</strong></p>
+
+<h2>Contact</h2>
+<p>{% if support_email %}<a href="mailto:{{ support_email }}">{{ support_email }}</a>{% else %}<strong>[support email — to be configured]</strong>{% endif %}</p>
+{% endblock %}
