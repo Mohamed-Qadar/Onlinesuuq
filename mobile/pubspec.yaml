@@ -1,7 +1,7 @@
 name: dukaan
 description: Native Android storefront and seller management for independent shops.
 publish_to: none
-version: 1.0.0+1
+version: 1.1.0+2
 environment:
   sdk: '>=3.13.0 <4.0.0'
   flutter: '>=3.47.6'
@@ -17,6 +17,8 @@ dependencies:
   shared_preferences: 2.5.6
   url_launcher: 6.3.1
   uuid: 4.6.0
+  path_provider: 2.1.6
+  file_selector: 1.1.0
 dev_dependencies:
   flutter_test:
     sdk: flutter

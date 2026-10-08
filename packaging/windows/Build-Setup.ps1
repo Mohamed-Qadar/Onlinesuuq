@@ -1,6 +1,7 @@
 [CmdletBinding()]
 param(
-    [Parameter(Mandatory = $true)][string]$ApiUrl,
+    [ValidateSet('offline', 'online')][string]$Mode = 'offline',
+    [string]$ApiUrl,
     [string]$InnoCompiler = (Join-Path ${env:ProgramFiles(x86)} 'Inno Setup 6\ISCC.exe'),
     [string]$CrtDirectory
 )
@@ -9,9 +10,9 @@ if ($env:PROCESSOR_ARCHITECTURE -ne 'AMD64') {
     throw 'Run this packaging script in 64-bit PowerShell on an x64 Windows build machine.'
 }
 $apiUri = $null
-if (-not [Uri]::TryCreate($ApiUrl, [UriKind]::Absolute, [ref]$apiUri) -or
+if ($Mode -eq 'online' -and (-not [Uri]::TryCreate($ApiUrl, [UriKind]::Absolute, [ref]$apiUri) -or
     $apiUri.Scheme -ne 'https' -or -not $apiUri.AbsolutePath.EndsWith('/api/v1/') -or
-    $apiUri.UserInfo -or $apiUri.Query -or $apiUri.Fragment) {
+    $apiUri.UserInfo -or $apiUri.Query -or $apiUri.Fragment)) {
     throw 'ApiUrl must be a real HTTPS URL ending in /api/v1/, without credentials, query or fragment.'
 }
 $root = (Resolve-Path -LiteralPath (Join-Path $PSScriptRoot '..\..')).Path
@@ -33,7 +34,11 @@ try {
     if ($LASTEXITCODE -ne 0) { throw 'Flutter analysis failed.' }
     & $flutter test
     if ($LASTEXITCODE -ne 0) { throw 'Flutter tests failed.' }
-    & $flutter build windows --release "--dart-define=API_URL=$ApiUrl"
+    if ($Mode -eq 'offline') {
+        & $flutter build windows --release --target lib/offline_main.dart
+    } else {
+        & $flutter build windows --release "--dart-define=API_URL=$ApiUrl"
+    }
     if ($LASTEXITCODE -ne 0) { throw 'Windows release build failed; no installer was generated.' }
 } finally { Pop-Location }
 $runtimeArgs = @{}

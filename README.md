@@ -2,29 +2,32 @@
 
 **Dukaankaaga, gacantaada. — Your shop, in your hands.**
 
-Onlinesuuq helps independent Somali sellers create a shop, add products, share a shop code and manage orders. Customers can order without registering. The native Flutter client supports Somali (default) and English; Django REST Framework and PostgreSQL provide the shared backend.
+## Windows: offline inventory
 
-## Windows download status
+Manage products, stock and sales on your own PC, without an account or backend. Somali and English are included.
 
-**A working public installer is not available yet.** The live backend has not been deployed. Source code and installer packaging are available, but installing a client alone will not enable sign-in or orders.
+[Windows releases and installer](https://github.com/Mohamed-Qadar/Onlinesuuq/releases/latest)
 
-Windows installation is designed to use one `Onlinesuuq-Setup.exe`: no Python, Docker or database installation is required on the customer's PC. The server is hosted separately. There is no automatic payment collection; sellers verify direct payments themselves.
+Run **Onlinesuuq-Setup.exe**, click Install, and open Onlinesuuq from the Start menu. Windows 10/11 x64. The installer includes the required runtime; users do not need Python, Flutter or a database server.
 
-## Build and publish
+- Add products, SKU, category, USD price and opening stock.
+- Record stock in/out and sales, search products and review history.
+- Use **Export backup** regularly, preferably to another drive. **Restore backup** replaces the inventory with a selected backup after confirmation.
+- Data stays in this Windows user's application-data folder, outside the installation directory. Updates and uninstall retain it. See **About / data location** for the exact location.
+- No online ordering, payments or automatic cloud synchronization in the offline release. Recorded sales are local bookkeeping entries, not payment confirmations.
 
-- [Windows build and installer instructions (Turkish)](docs/WINDOWS_RELEASE.md)
-- Ready Inno Setup script: [`packaging/windows/Onlinesuuq.iss`](packaging/windows/Onlinesuuq.iss)
-- Local build: `packaging/windows/Build-Setup.ps1 -ApiUrl https://YOUR_REAL_API_HOST/api/v1/`
-- GitHub **Actions → Build Windows Setup → Run workflow** accepts a live API URL, checks it, runs Flutter checks, builds the installer and optionally creates a **draft** release. The workflow is manual; pushing code does not start a build or publish a release.
-- Test the draft installer on a clean Windows PC before publishing it. No installer build or Windows installation is currently claimed as verified.
+**Soomaali:** Soo dejiso faylka rakibidda, ku dar alaabtaada, maamul kaydka oo diiwaangeli iibka. Internet iyo akoon looma baahna. Samee nuqul joogto ah.
 
-## Project
+## Build
 
-- `mobile/`: Flutter 3.47.6 / Dart 3.13.5, Android and Windows runners.
-- `backend/`: Python 3.12.14, Django 5.2.18, PostgreSQL API and admin.
-- `packaging/windows/`: per-user English installation wizard, shortcuts and bundled runtime helpers.
-- `docs/`: setup, API, release and validation notes.
+`packaging/windows/Build-Setup.ps1 -Mode offline` runs Flutter analysis/tests, builds `lib/offline_main.dart`, bundles the runtime and creates `dist/Onlinesuuq-Setup.exe` plus SHA256 checksum. Requires Flutter 3.47.6, Visual Studio C++ tools and Inno Setup 6.3+.
 
-[Local development guide (Turkish)](docs/LOCAL_DEVELOPMENT_TR.md) · [API documentation](docs/API.md) · [Test record](docs/TEST_RESULTS.md) · [Pilot limits](docs/PILOT.md)
+GitHub **Actions → Build Windows Setup → Run workflow → offline** does the build on Windows, checks installation/native startup/uninstall and creates a draft release. Review checks before publishing. The installer is currently unsigned.
 
-Keep `.env`, private signing keys, tokens, database dumps, uploaded customer files and local databases out of Git. Release configuration includes only the public HTTPS API address. Never embed server secrets in the desktop client.
+## Future online version
+
+The original Flutter storefront entry point (`lib/main.dart`) and Django/PostgreSQL backend remain in the repository. Build with `-Mode online -ApiUrl https://YOUR_REAL_HOST/api/v1/` only after deploying a live backend. Local stock is not automatically synced; the versioned JSON export preserves identifiers and history for a future explicit migration.
+
+[Windows instructions](docs/WINDOWS_RELEASE.md) · [Local development (Turkish)](docs/LOCAL_DEVELOPMENT_TR.md) · [API](docs/API.md) · [Offline release notes](docs/release-offline.md)
+
+Never commit `.env`, private keys, tokens, backups or customer data.

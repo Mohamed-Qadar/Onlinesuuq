@@ -3,9 +3,15 @@ name: Build Windows Setup
 on:
   workflow_dispatch:
     inputs:
-      api_url:
-        description: 'Live HTTPS Django URL ending in /api/v1/ (required)'
+      mode:
+        description: 'Offline inventory or online storefront'
+        type: choice
+        options: [offline, online]
+        default: offline
         required: true
+      api_url:
+        description: 'Online mode only: live HTTPS Django URL ending in /api/v1/'
+        required: false
         type: string
       create_draft_release:
         description: 'Attach Setup to a draft release after a successful build'
@@ -32,6 +38,7 @@ jobs:
         with:
           persist-credentials: false
       - name: Check live backend
+        if: ${{ inputs.mode == 'online' }}
         env:
           API_URL: ${{ inputs.api_url }}
         run: |
@@ -53,10 +60,14 @@ jobs:
           (Join-Path $sdk 'bin') | Out-File -FilePath $env:GITHUB_PATH -Append -Encoding utf8
       - name: Build and package
         env:
+          BUILD_MODE: ${{ inputs.mode }}
           API_URL: ${{ inputs.api_url }}
         run: |
           flutter config --enable-windows-desktop --no-analytics
-          .\packaging\windows\Build-Setup.ps1 -ApiUrl $env:API_URL
+          .\packaging\windows\Build-Setup.ps1 -Mode $env:BUILD_MODE -ApiUrl $env:API_URL
+      - name: Test installer and offline startup
+        if: ${{ inputs.mode == 'offline' }}
+        run: .\packaging\windows\Test-Setup.ps1
       - name: Save installer artifact
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
@@ -68,12 +79,13 @@ jobs:
         if: ${{ inputs.create_draft_release }}
         env:
           GH_TOKEN: ${{ github.token }}
+          BUILD_MODE: ${{ inputs.mode }}
         run: |
           $spec = Get-Content mobile/pubspec.yaml -Raw
           $version = [regex]::Match($spec, '(?m)^version:\s*(\d+\.\d+\.\d+)').Groups[1].Value
           if (-not $version) { throw 'Missing release version.' }
           gh release create "v$version" --draft --target $env:GITHUB_SHA `
-            --title "Onlinesuuq $version - Windows" `
-            --notes 'Windows x64 installer. Somali and English. Internet connection required. Test installation, sign-in, photo uploads and checkout on a clean PC before publishing this draft.' `
+            --title "Onlinesuuq $version - Windows ($env:BUILD_MODE)" `
+            --notes-file "docs/release-$env:BUILD_MODE.md" `
             dist/Onlinesuuq-Setup.exe dist/Onlinesuuq-Setup.exe.sha256
           if ($LASTEXITCODE -ne 0) { throw 'Draft release creation failed. The workflow artifact is still available.' }

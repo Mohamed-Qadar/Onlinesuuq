@@ -18,3 +18,7 @@ mobile/android/key.properties
 .flutter-plugins-dependencies
 .local/
 dist/
+
+Onlinesuuq-backup-*.json
+inventory-*.json
+inventory.lock

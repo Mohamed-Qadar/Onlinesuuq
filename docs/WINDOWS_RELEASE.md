@@ -1,3 +1,21 @@
+# Offline Windows inventory (1.1.0)
+
+The desktop release now works without an API or account. Build with:
+
+```powershell
+.\packaging\windows\Build-Setup.ps1 -Mode offline
+```
+
+GitHub Actions: Build Windows Setup > Run workflow > mode: offline. This builds the installer, checks silent installation/native startup/uninstall, and optionally creates a draft release.
+
+Users can add products, record stock in/out and sales, and export/restore JSON backups. Restore replaces the current inventory after confirmation. Data is kept outside the install folder and retained on uninstall; the app's About menu shows its location. Somali and English are included. Online orders, payments and cloud sync are not included. Keep backups for a future explicit data migration.
+
+---
+
+## Original online client instructions
+
+The API instructions below apply only to online builds. Pass `-Mode online` to Build-Setup.ps1.
+
 # Onlinesuuq: Windows Release ve tek Setup.exe
 
 Windows kaynakları `mobile/windows/`, kurulum betikleri `packaging/windows/` altındadır. Bu paket Flutter istemcisini kurar; Django/PostgreSQL canlı sunucuda kalır. Kullanıcıya Python, Docker, Flutter veya PostgreSQL kurdurulmaz. İlk giriş/sipariş işlemleri için internet gerekir.
