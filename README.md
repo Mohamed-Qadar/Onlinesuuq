@@ -35,3 +35,11 @@ The original Flutter storefront entry point (`lib/main.dart`) and Django/Postgre
 [Windows instructions](docs/WINDOWS_RELEASE.md) · [Local development (Turkish)](docs/LOCAL_DEVELOPMENT_TR.md) · [API](docs/API.md) · [Offline release notes](docs/release-offline.md)
 
 Never commit `.env`, private keys, tokens, backups or customer data.
+
+## Developer
+
+**Eng. Mohamed Ibrahim Abdi**  
+Computer Engineer — Specialty: Natural Language Processing and Computer Vision  
+Contact: [mohamedqadar280@gmail.com](mailto:mohamedqadar280@gmail.com)
+
+Developer attribution is built into the app and cannot be edited through inventory settings or backups. This does not prevent someone from modifying the public source and compiling a different app.
